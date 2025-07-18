@@ -29,8 +29,8 @@ namespace Content_Management_System
         private void LeaveBtn_Click(object sender, RoutedEventArgs e)
         {
             MessageBoxResult result = MessageBox.Show(
-                "Da li ste sigurni da želite da izađete?",
-                "Potvrda izlaska",
+                "Are you sure?",
+                "Exit confirmation",
                 MessageBoxButton.YesNo,
                 MessageBoxImage.Question);
 
@@ -47,13 +47,13 @@ namespace Content_Management_System
 
             if (string.IsNullOrWhiteSpace(name.Text))
             {
-                poruka += "Niste uneli korisničko ime\n";
+                poruka += "Username is required\n";
                 greska = true;
             }
 
             if (string.IsNullOrWhiteSpace(password.Password))
             {
-                poruka += "Niste uneli lozinku\n";
+                poruka += "Password is required\n";
                 greska = true;
             }
 
@@ -67,7 +67,7 @@ namespace Content_Management_System
                 DoubleAnimation fillAnimation = new DoubleAnimation
                 {
                     From = 0,
-                    To = 363, // Visina punjenja u pikselima
+                    To = 363, // fill height
                     Duration = new Duration(TimeSpan.FromSeconds(1)),
                     EasingFunction = new SineEase { EasingMode = EasingMode.EaseOut }
                 };

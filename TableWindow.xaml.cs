@@ -17,9 +17,9 @@ namespace Content_Management_System
     /// <summary>
     /// Interaction logic for Table.xaml
     /// </summary>
-    public partial class Table : Window
+    public partial class TableWindow : Window
     {
-        public Table()
+        public TableWindow()
         {
             InitializeComponent();
         }

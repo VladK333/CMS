@@ -7,7 +7,8 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="500" Width="750" 
         WindowStyle="SingleBorderWindow"
-        ResizeMode="NoResize">
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen">
 
     <Grid>
         <Grid.Background>
@@ -34,7 +35,6 @@
                 </TransformGroup>
             </Rectangle.RenderTransform>
             <Rectangle.Clip>
-                <!-- Klipujemo istom teglom ako treba da bude precizno -->
                 <RectangleGeometry Rect="0,0,320,400" RadiusX="90" RadiusY="60"/>
             </Rectangle.Clip>
         </Rectangle>
@@ -62,14 +62,14 @@
                 <!--
                 <Label Content="PRIJAVA KORISNIKA" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" FontSize="30" FontFamily="Verdana" FontWeight="Bold" Foreground="#003060"/>
                 -->
-                <Label Content="Korisničko ime: " Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontFamily="Verdana" Margin="10"/>
+                <Label Content="Username: " Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontFamily="Verdana" Margin="10"/>
                 <TextBox x:Name="name" Grid.Row="1" Grid.Column="1" FontSize="13" FontFamily="Verdana" VerticalAlignment="Center" Margin="10" BorderBrush="#CCC" BorderThickness="2"/>
 
-                <Label Content="Lozinka: " Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontFamily="Verdana" Margin="10"/>
+                <Label Content="Password: " Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontFamily="Verdana" Margin="10"/>
                 <PasswordBox x:Name="password" Grid.Row="2" Grid.Column="1" FontSize="13" FontFamily="Verdana" VerticalAlignment="Center" Margin="10" BorderBrush="#CCC" BorderThickness="2"/>
 
-                <Button x:Name="SubmitBtn" Click="SubmitBtn_Click"  Content="Prijavi se" Grid.Row="3" Grid.Column="0"  VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Verdana" FontSize="16" Background="LightBlue" FontWeight="SemiBold" BorderThickness="1" Cursor="Hand" Height="35" Width="90" Style="{StaticResource SubmitButtonStyle}"/>
-                <Button x:Name="LeaveBtn" Click="LeaveBtn_Click" Content="Izlaz" Grid.Row="3" Grid.Column="1"  VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Verdana" FontSize="16" FontWeight="Normal" Width="80"  BorderThickness="1" Cursor="Hand" Height="25" Style="{StaticResource ExitButtonStyle}"/>
+                <Button x:Name="SubmitBtn" Click="SubmitBtn_Click"  Content="Log in" Grid.Row="3" Grid.Column="0"  VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Verdana" FontSize="16" Background="LightBlue" FontWeight="SemiBold" BorderThickness="1" Cursor="Hand" Height="35" Width="90" Style="{StaticResource SubmitButtonStyle}"/>
+                <Button x:Name="LeaveBtn" Click="LeaveBtn_Click" Content="Exit" Grid.Row="3" Grid.Column="1"  VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Verdana" FontSize="16" FontWeight="Normal" Width="80"  BorderThickness="1" Cursor="Hand" Height="25" Style="{StaticResource ExitButtonStyle}"/>
                 <Label x:Name="errorLabel" Grid.Row="4" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Red"/>
 
             </Grid>
