@@ -88,7 +88,18 @@ namespace Content_Management_System
 
                     fillAnimation.Completed += (s, ev) =>
                     {
+                        var usersData = new UsersData();
+                        var users = usersData.DeSerializeObject<List<User>>("Users.xml");
+
+                        var loggedInUser = users?.FirstOrDefault(u => u.Username.Equals(name.Text, StringComparison.OrdinalIgnoreCase));
+
                         TableWindow tableWindow = new TableWindow();
+
+                        if (loggedInUser != null && loggedInUser.UserRole != UserRole.Admin)
+                        {
+                            tableWindow.HideAdminButtons();
+                        }
+
                         tableWindow.Show();
                         this.Close();
                     };

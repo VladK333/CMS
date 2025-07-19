@@ -45,7 +45,7 @@
                       Foreground="Black"
                       VerticalAlignment="Center"
                       Margin="5 0 20 0"/>
-            <Button x:Name="addBtn"
+            <Button x:Name="AddBtn"
                     Content="Add new"
                     Padding="10"
                     Background="White"
@@ -53,7 +53,7 @@
                     Width="120"
                     Cursor="Hand"
                     Margin="0 0 20 0"/>
-            <Button x:Name="Delete_btn"
+            <Button x:Name="DltBtn"
                     Content="Delete selected"
                     Padding="10"
                     Background="White"

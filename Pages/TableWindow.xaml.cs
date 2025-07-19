@@ -24,6 +24,12 @@ namespace Content_Management_System.Pages
             InitializeComponent();
         }
 
+        public void HideAdminButtons()
+        {
+            AddBtn.Visibility = Visibility.Collapsed;
+            DltBtn.Visibility = Visibility.Collapsed;
+        }
+
         private void LogOutBtn_Click(object sender, RoutedEventArgs e)
         {
             MessageBoxResult result = MessageBox.Show(
