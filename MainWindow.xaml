@@ -39,7 +39,7 @@
             </Rectangle.Clip>
         </Rectangle>
 
-        <Image Source="resources/images/jar1.png"
+        <Image Source="Resources/Images/jar1.png"
            Width="341"
            Height="470"
            VerticalAlignment="Top"

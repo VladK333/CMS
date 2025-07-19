@@ -55,6 +55,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\Spice.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="TableWindow.xaml.cs">
       <DependentUpon>TableWindow.xaml</DependentUpon>
     </Compile>
@@ -97,16 +99,16 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="resources\images\tableBackground.avif" />
+    <None Include="Resources\Images\tableBackground.avif" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="resources\images\spicesBackground.jpg" />
+    <Resource Include="Resources\Images\spicesBackground.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="resources\images\jar1.png" />
+    <Resource Include="Resources\Images\jar1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

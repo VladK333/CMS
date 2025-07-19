@@ -10,7 +10,7 @@
 
     <!-- Pozadina celog prozora -->
     <Window.Background>
-        <ImageBrush ImageSource="resources/images/tableBackground.avif"
+        <ImageBrush ImageSource="Resources/Images/tableBackground.avif"
                     Stretch="UniformToFill"
                     AlignmentX="Center"
                     AlignmentY="Center"/>
@@ -27,7 +27,7 @@
             <!-- Exit dugme -->
         </Grid.RowDefinitions>
 
-        <!-- Ako ti treba okvir sa zaobljenim uglovima, koristi Border -->
+        <!-- Okvir sa zaobljenim uglovima, koristi Border -->
         <Border Grid.RowSpan="3"
                 CornerRadius="10"
                 BorderBrush="DarkGray"
@@ -43,14 +43,16 @@
                       Content="Select All"
                       FontWeight="Bold"
                       Foreground="Black"
-                      VerticalAlignment="Center"/>
+                      VerticalAlignment="Center"
+                      Margin="5 0 20 0"/>
             <Button x:Name="addBtn"
                     Content="Add new"
                     Padding="10"
                     Background="White"
                     FontWeight="Bold"
                     Width="120"
-                    Cursor="Hand"/>
+                    Cursor="Hand"
+                    Margin="0 0 20 0"/>
             <Button x:Name="Delete_btn"
                     Content="Delete selected"
                     Padding="10"
@@ -76,7 +78,7 @@
                   ScrollViewer.VerticalScrollBarVisibility="Auto"
                   ScrollViewer.CanContentScroll="True">
             <DataGrid.Columns>
-                <DataGridTemplateColumn Header="Check" Width="70">
+                <DataGridTemplateColumn Header="Check" Width="80">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <CheckBox IsChecked="{Binding Selected, UpdateSourceTrigger=PropertyChanged}"
