@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Content_Management_System.Models;
 
 namespace Content_Management_System
 {
@@ -21,6 +23,9 @@ namespace Content_Management_System
     /// </summary>
     public partial class MainWindow : Window
     {
+        private ObservableCollection<User> Users;
+
+
         public MainWindow()
         {
             InitializeComponent();
