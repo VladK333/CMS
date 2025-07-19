@@ -14,7 +14,10 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Content_Management_System.HelpMethods;
+using Content_Management_System.HelpMethods.Users;
 using Content_Management_System.Models;
+using Content_Management_System.Pages;
 
 namespace Content_Management_System
 {
@@ -23,12 +26,14 @@ namespace Content_Management_System
     /// </summary>
     public partial class MainWindow : Window
     {
+        private UserAuth _userAuth;
         private ObservableCollection<User> Users;
 
 
         public MainWindow()
         {
             InitializeComponent();
+            _userAuth = new UserAuth();
         }
 
         private void LeaveBtn_Click(object sender, RoutedEventArgs e)
@@ -68,20 +73,34 @@ namespace Content_Management_System
             }
             else
             {
-                errorLabel.Content = "";
-                DoubleAnimation fillAnimation = new DoubleAnimation
+                bool validUser = _userAuth.UserAuthentication(name.Text, password.Password);
+
+                if (validUser)
                 {
-                    From = 0,
-                    To = 363, // fill height
-                    Duration = new Duration(TimeSpan.FromSeconds(1)),
-                    EasingFunction = new SineEase { EasingMode = EasingMode.EaseOut }
-                };
+                    errorLabel.Content = "";
+                    DoubleAnimation fillAnimation = new DoubleAnimation
+                    {
+                        From = 0,
+                        To = 363, // fill height
+                        Duration = new Duration(TimeSpan.FromSeconds(1)),
+                        EasingFunction = new SineEase { EasingMode = EasingMode.EaseOut }
+                    };
 
-                SpiceFill.BeginAnimation(HeightProperty, fillAnimation);
+                    fillAnimation.Completed += (s, ev) =>
+                    {
+                        TableWindow tableWindow = new TableWindow();
+                        tableWindow.Show();
+                        this.Close();
+                    };
+
+                    SpiceFill.BeginAnimation(HeightProperty, fillAnimation);
+                    
+                }
+                else
+                {
+                    errorLabel.Content = "User doesn't exist";
+                }
             }
-
-
-
         }
     }
 }

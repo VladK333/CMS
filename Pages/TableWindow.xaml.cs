@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Content_Management_System
+namespace Content_Management_System.Pages
 {
     /// <summary>
     /// Interaction logic for Table.xaml
