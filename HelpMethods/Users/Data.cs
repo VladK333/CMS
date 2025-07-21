@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 
 namespace Content_Management_System.HelpMethods
 {
-    public class UsersData
+    public class Data
     {
         public void SerializeObject<T>(T serializableObject, string fileName)
         {

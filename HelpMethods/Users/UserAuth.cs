@@ -9,11 +9,11 @@ namespace Content_Management_System.HelpMethods.Users
 {
     public class UserAuth
     {
-        private readonly UsersData _usersData;
+        private readonly Data _usersData;
 
         public UserAuth()
         {
-            _usersData = new UsersData();
+            _usersData = new Data();
         }
         public bool UserAuthentication(string username, string password)
         {

@@ -88,7 +88,7 @@ namespace Content_Management_System
 
                     fillAnimation.Completed += (s, ev) =>
                     {
-                        var usersData = new UsersData();
+                        var usersData = new Data();
                         var users = usersData.DeSerializeObject<List<User>>("Users.xml");
 
                         var loggedInUser = users?.FirstOrDefault(u => u.Username.Equals(name.Text, StringComparison.OrdinalIgnoreCase));

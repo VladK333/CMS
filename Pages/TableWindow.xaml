@@ -44,7 +44,9 @@
                       FontWeight="Bold"
                       Foreground="Black"
                       VerticalAlignment="Center"
-                      Margin="5 0 20 0"/>
+                      Margin="5 0 20 0"
+                      Checked="SelectAllCheckBox_Checked"
+                      Unchecked="SelectAllCheckBox_Unchecked"/>
             <Button x:Name="AddBtn"
                     Content="Add new"
                     Padding="10"
@@ -59,13 +61,14 @@
                     Background="White"
                     FontWeight="Bold"
                     Width="150"
-                    Cursor="Hand"/>
+                    Cursor="Hand"
+                    Click="DltBtn_Click"/>
         </StackPanel>
 
         <!-- Red 2: DataGrid -->
         <DataGrid x:Name="TableGrid"
                   Grid.Row="1"
-                   ItemsSource="{Binding Spices}"
+                  ItemsSource="{Binding Spices}"
                   IsReadOnly="True"
                   AutoGenerateColumns="False"
                   
@@ -73,10 +76,30 @@
                   HorizontalAlignment="Center"
                   VerticalAlignment="Top"
                   Height="250"
-                  Width="600"
+                  Width="530"
                   ScrollViewer.HorizontalScrollBarVisibility="Auto"
                   ScrollViewer.VerticalScrollBarVisibility="Auto"
                   ScrollViewer.CanContentScroll="True">
+             <DataGrid.Resources>
+                 <!-- Svetlo plava za selekciju -->
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#FFCCE5FF"/>
+                <!-- Crna boja za tekst (umesto bele) -->
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
+
+                <Style TargetType="DataGridRow">
+                    <Style.Triggers>
+                        <!-- Ako je čekiran CheckBox (Selected) -->
+                        <DataTrigger Binding="{Binding Selected}" Value="True">
+                            <Setter Property="Background" Value="#FFCCE5FF"/>
+                        </DataTrigger>
+                        <!-- Ako je red selektovan mišem/tastaturom -->
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="#FFCCE5FF"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.Resources>
+            
             <DataGrid.Columns>
                 <DataGridTemplateColumn Header="Check" Width="80">
                     <DataGridTemplateColumn.CellTemplate>
@@ -103,7 +126,7 @@
                 <DataGridTemplateColumn Header="Picture" Width="160">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Image Source="{Binding Picture}"
+                            <Image Source="{Binding ImagePath}"
                                    Width="140"
                                    Height="100"
                                    Stretch="Uniform"/>
@@ -112,7 +135,7 @@
                 </DataGridTemplateColumn>
 
                 <DataGridTextColumn Header="Date"
-                                    Binding="{Binding Date}"
+                                    Binding="{Binding DateTime, StringFormat={}{0:dd.MM.yyyy HH:mm}}"
                                     Width="140"/>
             </DataGrid.Columns>
         </DataGrid>
