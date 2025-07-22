@@ -121,8 +121,15 @@
   <ItemGroup>
     <Resource Include="Resources\Images\tableBackground.png" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Resources\Images\Spices\" />
+    <Resource Include="Resources\Images\Spices\Basil.jpg" />
+    <Resource Include="Resources\Images\Spices\BlackPepper.jpg" />
+    <Resource Include="Resources\Images\Spices\Cinnamon.jpg" />
+    <Resource Include="Resources\Images\Spices\Cumin.jpg" />
+    <Resource Include="Resources\Images\Spices\CurryPowder.jpg" />
+    <Resource Include="Resources\Images\Spices\Paprika.jpg" />
+    <Resource Include="Resources\Images\Spices\Saffron.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
