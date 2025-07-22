@@ -76,13 +76,14 @@
                   HorizontalAlignment="Center"
                   VerticalAlignment="Top"
                   Height="250"
-                  Width="530"
+                  RowHeight="106"
+                  Width="520"
                   ScrollViewer.HorizontalScrollBarVisibility="Auto"
                   ScrollViewer.VerticalScrollBarVisibility="Auto"
                   ScrollViewer.CanContentScroll="True">
              <DataGrid.Resources>
                  <!-- Svetlo plava za selekciju -->
-                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#FFCCE5FF"/>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#FCE4CF"/>
                 <!-- Crna boja za tekst (umesto bele) -->
                 <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
 
@@ -90,11 +91,11 @@
                     <Style.Triggers>
                         <!-- Ako je čekiran CheckBox (Selected) -->
                         <DataTrigger Binding="{Binding Selected}" Value="True">
-                            <Setter Property="Background" Value="#FFCCE5FF"/>
+                            <Setter Property="Background" Value="#FCE4CF"/>
                         </DataTrigger>
                         <!-- Ako je red selektovan mišem/tastaturom -->
                         <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="Background" Value="#FFCCE5FF"/>
+                            <Setter Property="Background" Value="#FCE4CF"/>
                         </Trigger>
                     </Style.Triggers>
                 </Style>
@@ -111,7 +112,7 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
 
-                <DataGridTemplateColumn Header="Name" Width="150">
+                <DataGridTemplateColumn Header="Name" Width="125">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -136,7 +137,7 @@
 
                 <DataGridTextColumn Header="Date"
                                     Binding="{Binding DateTime, StringFormat={}{0:dd.MM.yyyy HH:mm}}"
-                                    Width="140"/>
+                                    Width="130"/>
             </DataGrid.Columns>
         </DataGrid>
 
