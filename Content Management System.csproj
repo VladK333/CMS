@@ -59,6 +59,9 @@
     <Compile Include="HelpMethods\Users\UserAuth.cs" />
     <Compile Include="Models\Spice.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Pages\NewSpiceWindow.xaml.cs">
+      <DependentUpon>NewSpiceWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\TableWindow.xaml.cs">
       <DependentUpon>TableWindow.xaml</DependentUpon>
     </Compile>
@@ -74,6 +77,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\NewSpiceWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\TableWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -121,7 +128,6 @@
   <ItemGroup>
     <Resource Include="Resources\Images\tableBackground.png" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Resource Include="Resources\Images\Spices\Basil.jpg" />
     <Resource Include="Resources\Images\Spices\BlackPepper.jpg" />
@@ -130,6 +136,9 @@
     <Resource Include="Resources\Images\Spices\CurryPowder.jpg" />
     <Resource Include="Resources\Images\Spices\Paprika.jpg" />
     <Resource Include="Resources\Images\Spices\Saffron.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\imagePlaceholder1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

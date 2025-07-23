@@ -153,8 +153,15 @@ namespace Content_Management_System.Pages
                     Spices.Remove(spice);
                 }
                 TableGrid.Items.Refresh();
+                MessageBox.Show("Delete action complete");
             }
             SelectAllCheckBox.IsChecked = false;
+        }
+
+        private void AddBtn_Click(object sender, RoutedEventArgs e)
+        {
+            NewSpiceWindow newSpiceWindow = new NewSpiceWindow();
+            newSpiceWindow.ShowDialog();  // Otvara prozor kao modalni, čeka dok se ne zatvori
         }
     }
 }
