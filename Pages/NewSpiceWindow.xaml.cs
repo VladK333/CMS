@@ -41,6 +41,13 @@ namespace Content_Management_System.Pages
             // Popuni veličine fonta
             cmbFontSize.ItemsSource = new double[] { 8, 10, 12, 14, 16, 18, 20, 24, 28, 32 };
 
+            SetDefaultTextStyle();
+            Loaded += (s, e) =>
+            {
+                FocusManager.SetFocusedElement(this, this);
+                Keyboard.ClearFocus();
+            };
+
             // Event za brojanje reči
             DescriptionBox.TextChanged += DescriptionBox_TextChanged;
         }
@@ -162,18 +169,19 @@ namespace Content_Management_System.Pages
 
         private void CmbFontFamily_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (cmbFontFamily.SelectedItem != null)
+            if (cmbFontFamily.SelectedItem is FontFamily font)
             {
-                var font = (FontFamily)cmbFontFamily.SelectedItem;
-                DescriptionBox.Selection.ApplyPropertyValue(TextElement.FontFamilyProperty, font);
+                DescriptionBox.Focus(); // Vrati fokus na RichTextBox
+                ApplyTextFormatting(TextElement.FontFamilyProperty, font);
             }
         }
 
         private void CmbFontSize_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (cmbFontSize.SelectedItem != null)
+            if (cmbFontSize.SelectedItem is double size)
             {
-                DescriptionBox.Selection.ApplyPropertyValue(TextElement.FontSizeProperty, cmbFontSize.SelectedItem);
+                DescriptionBox.Focus(); // Vrati fokus na RichTextBox
+                ApplyTextFormatting(TextElement.FontSizeProperty, size);
             }
         }
 
@@ -181,10 +189,59 @@ namespace Content_Management_System.Pages
         {
             if (cboColors.SelectedItem != null)
             {
+                DescriptionBox.Focus(); // Vrati fokus na RichTextBox
                 var colorProp = cboColors.SelectedItem.GetType().GetProperty("Color");
                 var color = (Color)colorProp.GetValue(cboColors.SelectedItem);
-                DescriptionBox.Selection.ApplyPropertyValue(TextElement.ForegroundProperty, new SolidColorBrush(color));
+                ApplyTextFormatting(TextElement.ForegroundProperty, new SolidColorBrush(color));
             }
+        }
+
+        private void ApplyTextFormatting(DependencyProperty property, object value)
+        {
+            // Ako postoji selekcija, primeni na selekciju
+            if (!DescriptionBox.Selection.IsEmpty)
+            {
+                DescriptionBox.Selection.ApplyPropertyValue(property, value);
+            }
+            else
+            {
+                // Ako nema selekcije (caret), primeni na caret (buduće kucanje)
+                DescriptionBox.Focus();
+                var caret = DescriptionBox.CaretPosition;
+
+                // Kreiramo prazan TextRange za caret i postavimo vrednost
+                var emptyRange = new TextRange(caret, caret);
+                emptyRange.ApplyPropertyValue(property, value);
+
+                // Postavi caret stil kao default
+                DescriptionBox.Selection.ApplyPropertyValue(property, value);
+            }
+        }
+        private void SetDefaultTextStyle()
+        {
+            // Podrazumevani font, veličina i boja
+            var defaultFont = new FontFamily("Courier New");
+            var defaultSize = 12.0;
+            var defaultBrush = Brushes.Black;
+
+            // Primeni na RichTextBox
+            DescriptionBox.Selection.ApplyPropertyValue(TextElement.FontFamilyProperty, defaultFont);
+            DescriptionBox.Selection.ApplyPropertyValue(TextElement.FontSizeProperty, defaultSize);
+            DescriptionBox.Selection.ApplyPropertyValue(TextElement.ForegroundProperty, defaultBrush);
+
+            // Postavi i u ComboBox-ove
+            cmbFontFamily.SelectedItem = Fonts.SystemFontFamilies.FirstOrDefault(f => f.Source == "Courier New");
+            cmbFontSize.SelectedItem = defaultSize;
+
+            // Pošto cboColors nije standardni ComboBox sa Color objektima nego anonimnim tipovima:
+            var defaultColorItem = cboColors.Items.Cast<object>()
+                .FirstOrDefault(c =>
+                {
+                    var nameProp = c.GetType().GetProperty("Name");
+                    return (string)nameProp.GetValue(c) == "Black";
+                });
+
+            cboColors.SelectedItem = defaultColorItem;
         }
     }
 }

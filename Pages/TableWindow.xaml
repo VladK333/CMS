@@ -19,7 +19,7 @@
     <!-- Layout -->
     <Grid Margin="10">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="60"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
@@ -42,6 +42,7 @@
                       Foreground="Black"
                       VerticalAlignment="Center"
                       Margin="5 0 20 0"
+                      
                       Checked="SelectAllCheckBox_Checked"
                       Unchecked="SelectAllCheckBox_Unchecked"/>
             <Button x:Name="AddBtn"

@@ -19,8 +19,8 @@
         <Grid Margin="15">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="100"/>
-                <RowDefinition Height="40"/>
+                <RowDefinition Height="108"/>
+                <RowDefinition Height="32"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="35"/>
@@ -55,7 +55,7 @@
                             Source="../Resources/Images/imagePlaceholder1.png"
                             Stretch="Uniform"
                             MaxWidth="140"
-                            MaxHeight="90"
+                            MaxHeight="100"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Center"/>
                     </Button>
@@ -65,7 +65,7 @@
                     Height="26"
                     Width="140"
                     FontFamily="Verdana"
-                    FontSize="12"
+                    FontSize="13"
                     Foreground="Red"
                     HorizontalAlignment="Center"
                            VerticalAlignment="Center"
@@ -75,14 +75,14 @@
                 <!-- Polja ID i Name -->
                 <StackPanel Grid.Column="1" VerticalAlignment="Center">
                     <StackPanel Orientation="Horizontal" Margin="20,0,20,5">
-                        <Label Content="ID:" Width="50" FontFamily="Verdana" FontSize="13" VerticalAlignment="Center"/>
-                        <TextBox x:Name="IdBox" Width="150" FontFamily="Verdana" FontSize="13" VerticalAlignment="Center" TextChanged="IdBox_TextChanged"/>
-                        <Label x:Name="errorLabelID" Width="140" Margin="10,0,0,0" Foreground="Red" FontFamily="Verdana"  FontSize="12"/>
+                        <Label Content="ID:" Width="50" FontFamily="Verdana" FontSize="14" VerticalAlignment="Center"/>
+                        <TextBox x:Name="IdBox" Width="150" FontFamily="Verdana" FontSize="14" VerticalAlignment="Center" TextChanged="IdBox_TextChanged"/>
+                        <Label x:Name="errorLabelID" Width="140" Margin="10,0,0,0" Foreground="Red" FontFamily="Verdana"  FontSize="13"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="20,0,20,5">
-                        <Label Content="Name:" Width="50" FontFamily="Verdana" FontSize="13" VerticalAlignment="Center"/>
-                        <TextBox x:Name="NameBox" Width="150" FontFamily="Verdana" FontSize="13" VerticalAlignment="Center" TextChanged="NameBox_TextChanged"/>
-                        <Label x:Name="errorLabelName" Width="140" Margin="10,0,0,0" Foreground="Red" FontFamily="Verdana"  FontSize="12"/>
+                        <Label Content="Name:" Width="50" FontFamily="Verdana" FontSize="14" VerticalAlignment="Center"/>
+                        <TextBox x:Name="NameBox" Width="150" FontFamily="Verdana" FontSize="14" VerticalAlignment="Center" TextChanged="NameBox_TextChanged"/>
+                        <Label x:Name="errorLabelName" Width="140" Margin="10,0,0,0" Foreground="Red" FontFamily="Verdana"  FontSize="13"/>
                     </StackPanel>
                 </StackPanel>
             </Grid>
@@ -90,32 +90,35 @@
             <Label Grid.Row="2" Content="Description" FontFamily="Verdana" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 
             <DockPanel Grid.Row="3" LastChildFill="True">
-                
+
                 <!-- Toolbar -->
-                <ToolBar Name="MainToolbar" DockPanel.Dock="Top" Width="496" HorizontalAlignment="Right" Margin="0,0,0,5">
+                <ToolBar Name="MainToolbar" DockPanel.Dock="Top" Margin="0,0,0,5" Width="565" HorizontalAlignment="Right">
                     <!-- Bold -->
                     <ToggleButton FontSize="17" Command="EditingCommands.ToggleBold"
                           Content=" B " Name="BtnBold" FontWeight="ExtraBold"/>
-
                     <Separator/>
-
                     <!-- Italic -->
                     <ToggleButton FontSize="17" Command="EditingCommands.ToggleItalic"
                           Content=" I " Name="BtnItalic" FontStyle="Italic" />
-
                     <Separator/>
-
                     <!-- Underline -->
                     <ToggleButton FontSize="17" Command="EditingCommands.ToggleUnderline"
                           Name="BtnUnderline">
                         <TextBlock TextDecorations="Underline" FontWeight="ExtraBold">U</TextBlock>
                     </ToggleButton>
-
                     <Separator/>
 
                     <!-- Font Family ComboBox -->
-                    <ComboBox x:Name="cmbFontFamily" Width="150" Margin="10,0,0,0"
-                      SelectionChanged="CmbFontFamily_SelectionChanged"/>
+                    <ComboBox x:Name="cmbFontFamily" Width="220" Margin="10,0,0,0"
+          SelectionChanged="CmbFontFamily_SelectionChanged">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Source}" 
+                       FontFamily="{Binding}" 
+                       FontSize="16"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
 
                     <!-- Color Picker -->
                     <ComboBox x:Name="cboColors" Width="150" Margin="10,0,0,0"
@@ -141,22 +144,22 @@
                     <TextBlock x:Name="txtWordCount" Text="Words: 0" FontFamily="Verdana" />
                 </StatusBar>
 
-                <RichTextBox x:Name="DescriptionBox" Grid.Row="2" VerticalAlignment="Top" FontFamily="Verdana" Height="156" VerticalScrollBarVisibility="Auto" TextChanged="DescriptionBox_TextChanged"/>
-                <!-- Status bar za broj reči -->
+                <RichTextBox x:Name="DescriptionBox" VerticalAlignment="Top" FontFamily="Verdana" Height="156" VerticalScrollBarVisibility="Auto" TextChanged="DescriptionBox_TextChanged"/>
+
             </DockPanel>
             <Label x:Name="errorLabelDescription"
                    Grid.Row="4"
                    Margin="0,0,0,5"
                    Foreground="Red"
                    FontFamily="Verdana"
-                   FontSize="12"
+                   FontSize="13"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Bottom"/>
 
             <!-- Dugmad za snimanje/otkazivanje -->
             <StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button x:Name="SaveBtn" Cursor="Hand" Content="Save" Width="100" Click="SaveBtn_Click" FontFamily="Verdana" Margin="0,0,10,0"/>
-                <Button x:Name="CancelBtn" Cursor="Hand" Content="Cancel" Width="100" Click="CancelBtn_Click" FontFamily="Verdana" Margin="10,0,0,0"/>
+                <Button x:Name="SaveBtn" Cursor="Hand" Content="Save" Width="100" Click="SaveBtn_Click" FontFamily="Verdana" Margin="0,0,10,0" Foreground="Black"/>
+                <Button x:Name="CancelBtn" Cursor="Hand" Content="Cancel" Width="100" Click="CancelBtn_Click" FontFamily="Verdana" Margin="10,0,0,0" Foreground="Black"/>
             </StackPanel>
         </Grid>
     </Border>

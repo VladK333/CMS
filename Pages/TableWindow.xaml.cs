@@ -52,7 +52,7 @@ namespace Content_Management_System.Pages
         {
             AddBtn.Visibility = Visibility.Collapsed;
             DltBtn.Visibility = Visibility.Collapsed;
-            //SelectAllCheckBox.Visibility = Visibility.Collapsed;
+            SelectAllCheckBox.Visibility = Visibility.Collapsed;
         }
 
         private void LogOutBtn_Click(object sender, RoutedEventArgs e)
