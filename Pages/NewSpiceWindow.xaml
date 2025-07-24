@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Content_Management_System.Pages"
         mc:Ignorable="d"
-        Height="400" Width="650">
+        Height="550" Width="650"
+                WindowStartupLocation="CenterScreen">
 
     <Window.Background>
         <ImageBrush ImageSource="../Resources/Images/tableBackground.png"
@@ -18,13 +19,11 @@
         <Grid Margin="15">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
-                <!-- Title -->
                 <RowDefinition Height="100"/>
-                <!-- Image and textBox -->
+                <RowDefinition Height="40"/>
                 <RowDefinition Height="*"/>
-                <!-- RichTextBox -->
-                <RowDefinition Height="Auto"/>
-                <!-- Buttons -->
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="35"/>
             </Grid.RowDefinitions>
 
             <!-- Naslov -->
@@ -52,7 +51,7 @@
                         Cursor="Hand"
                         Background="Transparent"
                         BorderThickness="0">
-                            <Image x:Name="ImagePreview"
+                        <Image x:Name="ImagePreview"
                             Source="../Resources/Images/imagePlaceholder1.png"
                             Stretch="Uniform"
                             MaxWidth="140"
@@ -69,6 +68,7 @@
                     FontSize="12"
                     Foreground="Red"
                     HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
                            />
                 </StackPanel>
 
@@ -87,15 +87,76 @@
                 </StackPanel>
             </Grid>
 
-            <!-- RichTextBox za opis -->
-            <GroupBox Grid.Row="2" Header="Description (RTF Content)" Margin="0,0,0,15">
-                <RichTextBox x:Name="DescriptionBox" VerticalScrollBarVisibility="Auto"/>
-            </GroupBox>
+            <Label Grid.Row="2" Content="Description" FontFamily="Verdana" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+
+            <DockPanel Grid.Row="3" LastChildFill="True">
+                
+                <!-- Toolbar -->
+                <ToolBar Name="MainToolbar" DockPanel.Dock="Top" Width="496" HorizontalAlignment="Right" Margin="0,0,0,5">
+                    <!-- Bold -->
+                    <ToggleButton FontSize="17" Command="EditingCommands.ToggleBold"
+                          Content=" B " Name="BtnBold" FontWeight="ExtraBold"/>
+
+                    <Separator/>
+
+                    <!-- Italic -->
+                    <ToggleButton FontSize="17" Command="EditingCommands.ToggleItalic"
+                          Content=" I " Name="BtnItalic" FontStyle="Italic" />
+
+                    <Separator/>
+
+                    <!-- Underline -->
+                    <ToggleButton FontSize="17" Command="EditingCommands.ToggleUnderline"
+                          Name="BtnUnderline">
+                        <TextBlock TextDecorations="Underline" FontWeight="ExtraBold">U</TextBlock>
+                    </ToggleButton>
+
+                    <Separator/>
+
+                    <!-- Font Family ComboBox -->
+                    <ComboBox x:Name="cmbFontFamily" Width="150" Margin="10,0,0,0"
+                      SelectionChanged="CmbFontFamily_SelectionChanged"/>
+
+                    <!-- Color Picker -->
+                    <ComboBox x:Name="cboColors" Width="150" Margin="10,0,0,0"
+                      SelectionChanged="CboColors_SelectionChanged">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <!-- Pravougaonik sa bojom -->
+                                    <Rectangle Margin="5,1,10,1" Width="20" Height="15"
+                                       Fill="{Binding Name}" Stroke="Black"/>
+                                    <TextBlock Text="{Binding Name}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+
+                    <!-- Font Size ComboBox -->
+                    <ComboBox x:Name="cmbFontSize" Width="60" Margin="10,0,0,0"
+                      SelectionChanged="CmbFontSize_SelectionChanged"/>
+                </ToolBar>
+
+                <StatusBar DockPanel.Dock="Bottom" Background="SandyBrown">
+                    <TextBlock x:Name="txtWordCount" Text="Words: 0" FontFamily="Verdana" />
+                </StatusBar>
+
+                <RichTextBox x:Name="DescriptionBox" Grid.Row="2" VerticalAlignment="Top" FontFamily="Verdana" Height="156" VerticalScrollBarVisibility="Auto" TextChanged="DescriptionBox_TextChanged"/>
+                <!-- Status bar za broj reči -->
+            </DockPanel>
+            <Label x:Name="errorLabelDescription"
+                   Grid.Row="4"
+                   Margin="0,0,0,5"
+                   Foreground="Red"
+                   FontFamily="Verdana"
+                   FontSize="12"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Bottom"/>
 
             <!-- Dugmad za snimanje/otkazivanje -->
-            <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button x:Name="SaveBtn" Content="Save" Width="100" Click="SaveBtn_Click"/>
-                <Button x:Name="CancelBtn" Content="Cancel" Width="100" Click="CancelBtn_Click"/>
+            <StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button x:Name="SaveBtn" Cursor="Hand" Content="Save" Width="100" Click="SaveBtn_Click" FontFamily="Verdana" Margin="0,0,10,0"/>
+                <Button x:Name="CancelBtn" Cursor="Hand" Content="Cancel" Width="100" Click="CancelBtn_Click" FontFamily="Verdana" Margin="10,0,0,0"/>
             </StackPanel>
         </Grid>
     </Border>

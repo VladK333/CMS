@@ -108,13 +108,6 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Resources\rtfs\Basil.rtf" />
-    <None Include="Resources\rtfs\BlackPepper.rtf" />
-    <None Include="Resources\rtfs\Cinnamon.rtf" />
-    <None Include="Resources\rtfs\Cumin.rtf" />
-    <None Include="Resources\rtfs\CurryPowder.rtf" />
-    <None Include="Resources\rtfs\Paprika.rtf" />
-    <None Include="Resources\rtfs\Saffron.rtf" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

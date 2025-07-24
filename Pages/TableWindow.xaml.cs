@@ -52,6 +52,7 @@ namespace Content_Management_System.Pages
         {
             AddBtn.Visibility = Visibility.Collapsed;
             DltBtn.Visibility = Visibility.Collapsed;
+            //SelectAllCheckBox.Visibility = Visibility.Collapsed;
         }
 
         private void LogOutBtn_Click(object sender, RoutedEventArgs e)
@@ -148,12 +149,40 @@ namespace Content_Management_System.Pages
 
             if (result == MessageBoxResult.Yes)
             {
+                // Bazni direktorijum projekta (bin/Debug/.. -> do projekta)
+                string projectDir = System.IO.Path.GetFullPath(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\.."));
+
                 foreach (var spice in spicesRemove)
                 {
+                    // Obriši RTF fajl (ako postoji)
+                    if (!string.IsNullOrWhiteSpace(spice.RtfPath))
+                    {
+                        string rtfFullPath = System.IO.Path.Combine(projectDir,
+                            spice.RtfPath.Replace("../../", "").Replace("/", System.IO.Path.DirectorySeparatorChar.ToString()));
+
+                        if (System.IO.File.Exists(rtfFullPath))
+                        {
+                            try
+                            {
+                                System.IO.File.Delete(rtfFullPath);
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show($"Failed to delete RTF file for {spice.Name}: {ex.Message}");
+                            }
+                        }
+                    }
                     Spices.Remove(spice);
                 }
+
                 TableGrid.Items.Refresh();
-                MessageBox.Show("Delete action complete");
+                dataHelper.SerializeObject(Spices, "Spices.xml");
+
+                MessageBox.Show(
+                    "Selected spice(s) deleted successfully!",
+                    "Success",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Information);
             }
             SelectAllCheckBox.IsChecked = false;
         }
@@ -161,7 +190,14 @@ namespace Content_Management_System.Pages
         private void AddBtn_Click(object sender, RoutedEventArgs e)
         {
             NewSpiceWindow newSpiceWindow = new NewSpiceWindow();
-            newSpiceWindow.ShowDialog();  // Otvara prozor kao modalni, čeka dok se ne zatvori
+            bool? result = newSpiceWindow.ShowDialog();
+
+            if (result == true)
+            {
+                TableWindow newTable = new TableWindow();
+                newTable.Show();
+                this.Close();
+            }
         }
     }
 }
