@@ -62,6 +62,9 @@
     <Compile Include="Pages\NewSpiceWindow.xaml.cs">
       <DependentUpon>NewSpiceWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\SpicePreviewWindow.xaml.cs">
+      <DependentUpon>SpicePreviewWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\TableWindow.xaml.cs">
       <DependentUpon>TableWindow.xaml</DependentUpon>
     </Compile>
@@ -78,6 +81,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Pages\NewSpiceWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\SpicePreviewWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -26,10 +26,12 @@ namespace Content_Management_System.Pages
     {
         public ObservableCollection<Spice> Spices { get; set; }
         Data dataHelper = new Data();
+        private UserRole currentRole;
 
-        public TableWindow()
+        public TableWindow(UserRole role)
         {
             InitializeComponent();
+            currentRole = role;
             LoadSpicesData();
         }
 
@@ -194,9 +196,38 @@ namespace Content_Management_System.Pages
 
             if (result == true)
             {
-                TableWindow newTable = new TableWindow();
+                TableWindow newTable = new TableWindow(currentRole);
                 newTable.Show();
                 this.Close();
+            }
+        }
+
+        private void Hyperlink_Click(object sender, RoutedEventArgs e)
+        {
+            var hyperlink = (Hyperlink)sender;
+            var spice = (Spice)((FrameworkElement)hyperlink.Parent).DataContext;
+
+            if (currentRole == UserRole.Admin)
+            {
+                var editWindow = new NewSpiceWindow(spice); // forma za edit
+                bool? result = editWindow.ShowDialog();
+                if (result == true)
+                {
+                    TableWindow newTable = new TableWindow(currentRole);
+                    newTable.Show();
+                    this.Close();
+                }
+            }
+            else
+            {
+                var previewWindow = new SpicePreviewWindow(spice); // samo pregled
+                bool? result = previewWindow.ShowDialog();
+                if (result == true)
+                {
+                    TableWindow newTable = new TableWindow(currentRole);
+                    newTable.Show();
+                    this.Close();
+                }
             }
         }
     }

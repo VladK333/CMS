@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Content_Management_System"
         mc:Ignorable="d"
-        Height="400" Width="650"
+        Height="500" Width="650"
         WindowStartupLocation="CenterScreen">
 
     <!-- Background --> 
@@ -77,8 +77,8 @@
                   CanUserAddRows="False"
                   HorizontalAlignment="Center"
                   VerticalAlignment="Top"
-                  Height="250"
-                  RowHeight="106"
+                  Height="360"
+                  RowHeight="104"
                   Width="520"
                   ScrollViewer.HorizontalScrollBarVisibility="Auto"
                   ScrollViewer.VerticalScrollBarVisibility="Auto"
@@ -116,7 +116,7 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">
-                                <Hyperlink>
+                                <Hyperlink Click="Hyperlink_Click">
                                     <Run Text="{Binding Name}"/>
                                 </Hyperlink>
                             </TextBlock>
@@ -141,7 +141,7 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <!-- Row 3: Exit button -->
+        <!-- Row 3: LogOut button -->
         <Grid Grid.Row="2">
             <Button x:Name="LogOutBtn"
                     Content="Log out"

@@ -93,7 +93,7 @@ namespace Content_Management_System
 
                         var loggedInUser = users?.FirstOrDefault(u => u.Username.Equals(name.Text, StringComparison.OrdinalIgnoreCase));
 
-                        TableWindow tableWindow = new TableWindow();
+                        TableWindow tableWindow = new TableWindow(loggedInUser.UserRole);
 
                         if (loggedInUser != null && loggedInUser.UserRole != UserRole.Admin)
                         {
