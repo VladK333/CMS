@@ -129,16 +129,23 @@
     <Resource Include="Resources\Images\tableBackground.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Images\Spices\Basil.jpg" />
-    <Resource Include="Resources\Images\Spices\BlackPepper.jpg" />
-    <Resource Include="Resources\Images\Spices\Cinnamon.jpg" />
-    <Resource Include="Resources\Images\Spices\Cumin.jpg" />
-    <Resource Include="Resources\Images\Spices\CurryPowder.jpg" />
-    <Resource Include="Resources\Images\Spices\Paprika.jpg" />
-    <Resource Include="Resources\Images\Spices\Saffron.jpg" />
+    <Resource Include="Resources\Images\imagePlaceholder1.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Images\imagePlaceholder1.png" />
+    <Resource Include="Resources\Images\icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Spices\Basil.png" />
+    <Resource Include="Resources\Images\Spices\BlackPepper.png" />
+    <Resource Include="Resources\Images\Spices\Cinnamon.png" />
+    <Resource Include="Resources\Images\Spices\Cumin.png" />
+    <Resource Include="Resources\Images\Spices\Saffron.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Spices\Paprika.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Spices\CurryPowder.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

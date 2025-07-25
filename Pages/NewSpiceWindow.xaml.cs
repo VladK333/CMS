@@ -25,6 +25,7 @@ namespace Content_Management_System.Pages
         private Data dataHelper = new Data();
         private bool isEditMode = false;       
         private Spice editingSpice = null; 
+
         public Spice ResultSpice { get; private set; }
 
         // Constructor for new Spice (empty form)
@@ -41,6 +42,9 @@ namespace Content_Management_System.Pages
             };
 
             DescriptionBox.TextChanged += DescriptionBox_TextChanged;
+
+            // Praćenje formata teksta dok se caret pomera
+            DescriptionBox.SelectionChanged += DescriptionBox_SelectionChanged;
         }
 
         // Constructor for edit
@@ -52,6 +56,8 @@ namespace Content_Management_System.Pages
             // data fill
             IdBox.Text = spiceToEdit.Id.ToString();
             IdBox.IsReadOnly = true;
+            IdBox.Cursor=Cursors.Arrow;
+            IdBox.BorderThickness = new Thickness(0);
             NameBox.Text = spiceToEdit.Name;
             ImagePreview.Source = new BitmapImage(new Uri(System.IO.Path.GetFullPath(spiceToEdit.ImagePath)));
 
@@ -107,11 +113,13 @@ namespace Content_Management_System.Pages
                 error = true;
             }
 
+
             if (string.IsNullOrWhiteSpace(NameBox.Text))
             {
                 errorLabelName.Content = "Name is required";
                 error = true;
             }
+            string name=NameBox.Text;
 
             string rtfText = new TextRange(DescriptionBox.Document.ContentStart, DescriptionBox.Document.ContentEnd).Text;
             if (string.IsNullOrWhiteSpace(rtfText))
@@ -126,6 +134,20 @@ namespace Content_Management_System.Pages
             if (!isEditMode && spices.Any(s => s.Id == parsedID))
             {
                 MessageBox.Show("Spice with this ID already exists!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            // if spice new, check name
+            if (!isEditMode && spices.Any(s => s.Name == name))
+            {
+                MessageBox.Show("Spice with this name already exists!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            // if edit spice, check if has the same name as another spice
+            if (isEditMode && spices.Any(s => s.Name == name && s.Id != editingSpice.Id))
+            {
+                MessageBox.Show("Spice with this name already exists!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
@@ -284,6 +306,21 @@ namespace Content_Management_System.Pages
                 });
 
             cboColors.SelectedItem = defaultColorItem;
+        }
+
+        private void DescriptionBox_SelectionChanged(object sender, RoutedEventArgs e) // buttons bold, italic, underline select if text is either b, i, u
+        {
+            // Check Bold
+            var weight = DescriptionBox.Selection.GetPropertyValue(TextElement.FontWeightProperty);
+            BtnBold.IsChecked = (weight != DependencyProperty.UnsetValue) && weight.Equals(FontWeights.Bold);
+
+            // Check Italic
+            var style = DescriptionBox.Selection.GetPropertyValue(TextElement.FontStyleProperty);
+            BtnItalic.IsChecked = (style != DependencyProperty.UnsetValue) && style.Equals(FontStyles.Italic);
+
+            // Check Underline
+            var decorations = DescriptionBox.Selection.GetPropertyValue(Inline.TextDecorationsProperty);
+            BtnUnderline.IsChecked = (decorations != DependencyProperty.UnsetValue) && decorations.Equals(TextDecorations.Underline);
         }
     }
 }

@@ -24,7 +24,6 @@ namespace Content_Management_System
     public partial class MainWindow : Window
     {
         private UserAuth _userAuth;
-        //private ObservableCollection<User> Users;
 
         public MainWindow()
         {
@@ -35,7 +34,7 @@ namespace Content_Management_System
         private void LeaveBtn_Click(object sender, RoutedEventArgs e)
         {
             MessageBoxResult result = MessageBox.Show(
-                "Are you sure?",
+                "Are you sure you want to exit?",
                 "Exit confirmation",
                 MessageBoxButton.YesNo,
                 MessageBoxImage.Question);

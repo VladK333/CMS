@@ -6,7 +6,10 @@
         xmlns:local="clr-namespace:Content_Management_System.Pages"
         mc:Ignorable="d"
         Height="550" Width="650"
-                WindowStartupLocation="CenterScreen">
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Icon="../Resources/Images/icon.ico"
+        Title="CMS">
 
     <Window.Background>
         <ImageBrush ImageSource="../Resources/Images/tableBackground.png"
@@ -26,32 +29,31 @@
                 <RowDefinition Height="35"/>
             </Grid.RowDefinitions>
 
-            <!-- Naslov -->
+            <!-- Title -->
             <TextBlock Grid.Row="0" Text="Spice Form"
                    FontSize="22" FontWeight="Bold" FontFamily="Verdana"
                    HorizontalAlignment="Center" Margin="0,0,0,15"/>
 
-            <!-- Deo za sliku (levo) i polja (desno) -->
+            <!-- Image ledt textboxes/labels right -->
             <Grid Grid.Row="1" Margin="0,0,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="140"/>
-                    <!-- Slika -->
+                    <!-- Image -->
                     <ColumnDefinition Width="*"/>
-                    <!-- Polja -->
+                    <!-- Textboxes/Labels -->
                 </Grid.ColumnDefinitions>
 
-                <!-- Kvadrat za preview slike -->
+                <!-- Image preview -->
                 <StackPanel Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <!-- Dugme sa slikom -->
+                    <!-- Button image -->
                     <Button x:Name="ImageBtn"
-                        
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         Click="ImageBtn_Click"
                         Cursor="Hand"
                         Background="Transparent"
                         BorderThickness="0">
-                        <Image x:Name="ImagePreview"
+                    <Image x:Name="ImagePreview"
                             Source="../Resources/Images/imagePlaceholder1.png"
                             Stretch="Uniform"
                             MaxWidth="140"
@@ -60,19 +62,18 @@
                             HorizontalAlignment="Center"/>
                     </Button>
 
-                    <!-- Labela ispod slike -->
+                        <!-- Label below image -->
                     <Label x:Name="errorLabelImage"
-                    Height="26"
-                    Width="140"
-                    FontFamily="Verdana"
-                    FontSize="13"
-                    Foreground="Red"
-                    HorizontalAlignment="Center"
-                           VerticalAlignment="Center"
-                           />
+                        Height="26"
+                        Width="140"
+                        FontFamily="Verdana"
+                        FontSize="12"
+                        Foreground="Red"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"/>
                 </StackPanel>
 
-                <!-- Polja ID i Name -->
+                <!-- ID i Name -->
                 <StackPanel Grid.Column="1" VerticalAlignment="Center">
                     <StackPanel Orientation="Horizontal" Margin="20,0,20,5">
                         <Label Content="ID:" Width="55" FontFamily="Verdana" FontSize="14" VerticalAlignment="Center"/>
@@ -102,20 +103,19 @@
                           Content=" I " Name="BtnItalic" FontStyle="Italic" />
                     <Separator/>
                     <!-- Underline -->
-                    <ToggleButton FontSize="17" Command="EditingCommands.ToggleUnderline"
-                          Name="BtnUnderline">
+                    <ToggleButton FontSize="17" Command="EditingCommands.ToggleUnderline" Name="BtnUnderline">
                         <TextBlock TextDecorations="Underline" FontWeight="ExtraBold">U</TextBlock>
                     </ToggleButton>
                     <Separator/>
 
                     <!-- Font Family ComboBox -->
                     <ComboBox x:Name="cmbFontFamily" Width="220" Margin="10,0,0,0"
-          SelectionChanged="CmbFontFamily_SelectionChanged">
+                              SelectionChanged="CmbFontFamily_SelectionChanged">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Source}" 
-                       FontFamily="{Binding}" 
-                       FontSize="16"/>
+                                    FontFamily="{Binding}" 
+                                    FontSize="16"/>
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>
@@ -126,7 +126,7 @@
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <!-- Pravougaonik sa bojom -->
+                                    <!-- Rectangle for colors -->
                                     <Rectangle Margin="5,1,10,1" Width="20" Height="15"
                                        Fill="{Binding Name}" Stroke="Black"/>
                                     <TextBlock Text="{Binding Name}"/>
@@ -156,10 +156,10 @@
                    HorizontalAlignment="Center"
                    VerticalAlignment="Bottom"/>
 
-            <!-- Dugmad za snimanje/otkazivanje -->
+            <!-- Save and Cancel buttons -->
             <StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button x:Name="SaveBtn" Cursor="Hand" Content="Save" Width="100" Click="SaveBtn_Click" FontFamily="Verdana" Margin="0,0,10,0" Foreground="Black"/>
-                <Button x:Name="CancelBtn" Cursor="Hand" Content="Cancel" Width="100" Click="CancelBtn_Click" FontFamily="Verdana" Margin="10,0,0,0" Foreground="Black"/>
+                <Button x:Name="SaveBtn" Cursor="Hand" Content="Save" Width="100" Click="SaveBtn_Click" FontFamily="Verdana" FontSize="14" Margin="0,0,10,0" Foreground="Black"/>
+                <Button x:Name="CancelBtn" Cursor="Hand" Content="Cancel" Width="100" Click="CancelBtn_Click" FontFamily="Verdana" FontSize="14" Margin="10,0,0,0" Foreground="Black"/>
             </StackPanel>
         </Grid>
     </Border>

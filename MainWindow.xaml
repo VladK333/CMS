@@ -8,7 +8,9 @@
         Height="500" Width="750" 
         WindowStyle="SingleBorderWindow"
         ResizeMode="NoResize"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        Icon="Resources/Images/icon.ico"
+        Title="CMS">
 
     <Grid>
         <Grid.Background>
@@ -57,20 +59,38 @@
                     <RowDefinition Height="1*"></RowDefinition>
                     <RowDefinition Height="1*"></RowDefinition>
                     <RowDefinition Height="1*"></RowDefinition>
-                    <RowDefinition Height="0.6*"></RowDefinition>
+                    <RowDefinition Height="0.5*"></RowDefinition>
                 </Grid.RowDefinitions>
                 
-                <Label Content="LOGIN" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" FontSize="20" FontFamily="Verdana" FontWeight="Bold"/>
+                <Label Content="LOGIN" Grid.Row="0" Grid.ColumnSpan="2" 
+                       HorizontalAlignment="Center" FontSize="20" 
+                       FontFamily="Verdana" FontWeight="Bold"/>
                 
-                <Label Content="Username: " Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontFamily="Verdana" Margin="10"/>
-                <TextBox x:Name="name" Grid.Row="1" Grid.Column="1" FontSize="13" FontFamily="Verdana" VerticalAlignment="Center" Margin="10" BorderBrush="#CCC" BorderThickness="2"/>
+                <Label Content="Username: " Grid.Row="1" Grid.Column="0"
+                       VerticalAlignment="Center" HorizontalAlignment="Left" 
+                       FontSize="13" FontFamily="Verdana" Margin="10"/>
+                <TextBox x:Name="name" Grid.Row="1" Grid.Column="1"
+                         FontSize="13" FontFamily="Verdana" VerticalAlignment="Center"
+                         Margin="10" BorderBrush="#CCC" BorderThickness="2"/>
 
-                <Label Content="Password: " Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" FontFamily="Verdana" Margin="10"/>
-                <PasswordBox x:Name="password" Grid.Row="2" Grid.Column="1" FontSize="13" FontFamily="Verdana" VerticalAlignment="Center" Margin="10" BorderBrush="#CCC" BorderThickness="2"/>
+                <Label Content="Password: " Grid.Row="2" Grid.Column="0"
+                       VerticalAlignment="Center" HorizontalAlignment="Left"
+                       FontSize="13" FontFamily="Verdana" Margin="10"/>
+                <PasswordBox x:Name="password" Grid.Row="2" Grid.Column="1"
+                             FontSize="13" FontFamily="Verdana" VerticalAlignment="Center"
+                             Margin="10" BorderBrush="#CCC" BorderThickness="2"/>
 
-                <Button x:Name="SubmitBtn" Click="SubmitBtn_Click"  Content="Log in" Grid.Row="3" Grid.Column="0"  VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Verdana" FontSize="16" Background="LightBlue" FontWeight="SemiBold" BorderThickness="1" Cursor="Hand" Height="35" Width="90" Style="{StaticResource SubmitButtonStyle}"/>
-                <Button x:Name="LeaveBtn" Click="LeaveBtn_Click" Content="Exit" Grid.Row="3" Grid.Column="1"  VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Verdana" FontSize="16" FontWeight="Normal" Width="80"  BorderThickness="1" Cursor="Hand" Height="25" Style="{StaticResource ExitButtonStyle}"/>
-                <Label x:Name="errorLabel" Grid.Row="4" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Red"/>
+                <Button x:Name="SubmitBtn" Click="SubmitBtn_Click"  Content="Log in" Grid.Row="3" Grid.Column="0"
+                        VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Verdana" FontSize="16" 
+                        Background="LightBlue" FontWeight="SemiBold" BorderThickness="1" Cursor="Hand" Height="25" Width="90" Style="{StaticResource SubmitButtonStyle}"/>
+                
+                <Button x:Name="LeaveBtn" Click="LeaveBtn_Click" Content="Exit" Grid.Row="3" Grid.Column="1"  
+                        VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Verdana" FontSize="16" 
+                        FontWeight="Normal" Width="80"  BorderThickness="1" Cursor="Hand" Height="25" Style="{StaticResource ExitButtonStyle}"/>
+                
+                <Label x:Name="errorLabel" Grid.Row="4" Grid.ColumnSpan="2"
+                       VerticalAlignment="Center" HorizontalAlignment="Center"
+                       Foreground="Red" FontFamily="Verdana"/>
 
             </Grid>
         </Border>

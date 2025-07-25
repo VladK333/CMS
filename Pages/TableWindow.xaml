@@ -6,7 +6,10 @@
         xmlns:local="clr-namespace:Content_Management_System"
         mc:Ignorable="d"
         Height="500" Width="650"
-        WindowStartupLocation="CenterScreen">
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Icon="../Resources/Images/icon.ico"
+        Title="CMS">
 
     <!-- Background --> 
     <Window.Background>
@@ -42,7 +45,6 @@
                       Foreground="Black"
                       VerticalAlignment="Center"
                       Margin="5 0 20 0"
-                      
                       Checked="SelectAllCheckBox_Checked"
                       Unchecked="SelectAllCheckBox_Unchecked"/>
             <Button x:Name="AddBtn"
@@ -73,7 +75,6 @@
                   IsReadOnly="True"
                   AutoGenerateColumns="False"
                   FontFamily="Verdana"
-                  
                   CanUserAddRows="False"
                   HorizontalAlignment="Center"
                   VerticalAlignment="Top"
