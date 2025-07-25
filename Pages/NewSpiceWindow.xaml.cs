@@ -27,7 +27,7 @@ namespace Content_Management_System.Pages
         private Spice editingSpice = null; 
         public Spice ResultSpice { get; private set; }
 
-        // Konstruktor za dodavanje (prazna forma)
+        // Constructor for new Spice (empty form)
         public NewSpiceWindow()
         {
             InitializeComponent();
@@ -43,19 +43,19 @@ namespace Content_Management_System.Pages
             DescriptionBox.TextChanged += DescriptionBox_TextChanged;
         }
 
-        // Konstruktor za edit postojeceg zacina
+        // Constructor for edit
         public NewSpiceWindow(Spice spiceToEdit) : this()
         {
             isEditMode = true;
             editingSpice = spiceToEdit;
 
-            // Popuni polja podacima
+            // data fill
             IdBox.Text = spiceToEdit.Id.ToString();
             IdBox.IsReadOnly = true;
             NameBox.Text = spiceToEdit.Name;
             ImagePreview.Source = new BitmapImage(new Uri(System.IO.Path.GetFullPath(spiceToEdit.ImagePath)));
 
-            // Učitaj opis iz RTF fajla
+            // rtf
             string rtfFullPath = System.IO.Path.GetFullPath(spiceToEdit.RtfPath);
             if (File.Exists(rtfFullPath))
             {
@@ -71,7 +71,7 @@ namespace Content_Management_System.Pages
         {
             spices = dataHelper.DeSerializeObject<ObservableCollection<Spice>>("Spices.xml");
 
-            // Fontovi, boje, veličine
+            // Font, colors, size
             cmbFontFamily.ItemsSource = Fonts.SystemFontFamilies.OrderBy(f => f.Source);
             cboColors.ItemsSource = typeof(Colors).GetProperties()
                 .Select(c => new { Name = c.Name, Color = (Color)c.GetValue(null) });
@@ -114,7 +114,7 @@ namespace Content_Management_System.Pages
             }
 
             string rtfText = new TextRange(DescriptionBox.Document.ContentStart, DescriptionBox.Document.ContentEnd).Text;
-            if (string.IsNullOrWhiteSpace(rtfText) || rtfText.Trim() == string.Empty)
+            if (string.IsNullOrWhiteSpace(rtfText))
             {
                 errorLabelDescription.Content = "Description is required";
                 error = true;
@@ -122,32 +122,46 @@ namespace Content_Management_System.Pages
 
             if (error) return;
 
-            // Ako je novi, provera da li postoji ID
+            // if spice new, check ID
             if (!isEditMode && spices.Any(s => s.Id == parsedID))
             {
                 MessageBox.Show("Spice with this ID already exists!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
-            // Putanje
+            // image path
             string imageFileName = System.IO.Path.GetFileName((ImagePreview.Source as BitmapImage)?.UriSource.LocalPath);
             string relativeImagePath = "../../Resources/Images/Spices/" + imageFileName;
 
-            string rtfFileName = NameBox.Text.Replace(" ", "") + ".rtf";
-            string relativeRtfPath = "../../Resources/rtfs/" + rtfFileName;
-            string rtfFullPath = System.IO.Path.GetFullPath(System.IO.Path.Combine(
-                AppDomain.CurrentDomain.BaseDirectory, @"..\..\Resources\rtfs", rtfFileName));
+            string relativeRtfPath;
+            string rtfFullPath;
 
+            if (isEditMode)
+            {
+                // leave same path 
+                relativeRtfPath = editingSpice.RtfPath;
+                rtfFullPath = System.IO.Path.GetFullPath(System.IO.Path.Combine(
+                    AppDomain.CurrentDomain.BaseDirectory, @"..\..", relativeRtfPath.Replace("../../", "")));
+            }
+            else
+            {
+                // New spice -> new file
+                string rtfFileName = NameBox.Text.Replace(" ", "") + ".rtf";
+                relativeRtfPath = "../../Resources/rtfs/" + rtfFileName;
+                rtfFullPath = System.IO.Path.GetFullPath(System.IO.Path.Combine(
+                    AppDomain.CurrentDomain.BaseDirectory, @"..\..\Resources\rtfs", rtfFileName));
+            }
+
+            // Save changes in rtf
             Directory.CreateDirectory(System.IO.Path.GetDirectoryName(rtfFullPath));
             using (FileStream fs = new FileStream(rtfFullPath, FileMode.Create))
             {
-                new TextRange(DescriptionBox.Document.ContentStart, DescriptionBox.Document.ContentEnd)
-                    .Save(fs, DataFormats.Rtf);
+                new TextRange(DescriptionBox.Document.ContentStart, DescriptionBox.Document.ContentEnd).Save(fs, DataFormats.Rtf);
             }
 
             if (isEditMode)
             {
-                // Nađi objekat u kolekciji
+                // Update existing spice
                 var existing = spices.FirstOrDefault(s => s.Id == editingSpice.Id);
                 if (existing != null)
                 {
@@ -161,13 +175,14 @@ namespace Content_Management_System.Pages
             }
             else
             {
+                // Add new spice
                 var newSpice = new Spice(parsedID, NameBox.Text, relativeImagePath, relativeRtfPath, DateTime.Now);
                 newSpice.Selected = false;
                 spices.Add(newSpice);
                 ResultSpice = newSpice;
             }
 
-            // Snimi sve u XML
+            // XML update
             dataHelper.SerializeObject(spices, "Spices.xml");
 
             MessageBox.Show(isEditMode ? "Spice updated!" : "New spice saved!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -232,7 +247,7 @@ namespace Content_Management_System.Pages
             }
         }
 
-        private void ApplyTextFormatting(DependencyProperty property, object value)
+        private void ApplyTextFormatting(DependencyProperty property, object value) //fonts, color, size applied in RichTextBox
         {
             if (!DescriptionBox.Selection.IsEmpty)
             {
@@ -248,7 +263,7 @@ namespace Content_Management_System.Pages
             }
         }
 
-        private void SetDefaultTextStyle()
+        private void SetDefaultTextStyle()  //default values in toolbar
         {
             var defaultFont = new FontFamily("Courier New");
             var defaultSize = 12.0;

@@ -24,7 +24,7 @@ namespace Content_Management_System.HelpMethods
             }
             catch (Exception ex)
             {
-                // Log exception here
+                Console.WriteLine(ex);
             }
         }
 

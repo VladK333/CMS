@@ -30,6 +30,5 @@ namespace Content_Management_System.HelpMethods.Users
 
             return false;
         }
-
     }
 }

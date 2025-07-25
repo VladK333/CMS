@@ -26,7 +26,7 @@ namespace Content_Management_System.Pages
             NameBox.Text = spice.Name;
             ImagePreview.Source = new BitmapImage(new Uri(System.IO.Path.GetFullPath(spice.ImagePath)));
 
-            // Učitaj opis iz RTF fajla
+            // data from rtf file
             string rtfFullPath = System.IO.Path.GetFullPath(spice.RtfPath);
             if (File.Exists(rtfFullPath))
             {

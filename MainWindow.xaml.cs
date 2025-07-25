@@ -21,14 +21,10 @@ using Content_Management_System.Pages;
 
 namespace Content_Management_System
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         private UserAuth _userAuth;
-        private ObservableCollection<User> Users;
-
+        //private ObservableCollection<User> Users;
 
         public MainWindow()
         {
@@ -86,7 +82,7 @@ namespace Content_Management_System
                         EasingFunction = new SineEase { EasingMode = EasingMode.EaseOut }
                     };
 
-                    fillAnimation.Completed += (s, ev) =>
+                    fillAnimation.Completed += (s, ev) =>               //when the animation is complete, do this...
                     {
                         var usersData = new Data();
                         var users = usersData.DeSerializeObject<List<User>>("Users.xml");
@@ -104,8 +100,7 @@ namespace Content_Management_System
                         this.Close();
                     };
 
-                    SpiceFill.BeginAnimation(HeightProperty, fillAnimation);
-                    
+                    SpiceFill.BeginAnimation(HeightProperty, fillAnimation);  
                 }
                 else
                 {

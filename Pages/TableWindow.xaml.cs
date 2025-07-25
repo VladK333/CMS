@@ -18,17 +18,13 @@ using System.ComponentModel;
 
 namespace Content_Management_System.Pages
 {
-    /// <summary>
-    /// Interaction logic for Table.xaml
-    /// </summary>
     public partial class TableWindow : Window
-
     {
         public ObservableCollection<Spice> Spices { get; set; }
         Data dataHelper = new Data();
         private UserRole currentRole;
 
-        public TableWindow(UserRole role)
+        public TableWindow(UserRole role)   //role needed for hyperlink 
         {
             InitializeComponent();
             currentRole = role;
@@ -37,20 +33,18 @@ namespace Content_Management_System.Pages
 
         private void LoadSpicesData()
         {
-
             Spices = dataHelper.DeSerializeObject<ObservableCollection<Spice>>("Spices.xml");
 
             if (Spices == null)
             {
-                MessageBox.Show("Error with opening the file");
+                MessageBox.Show("Error with opening the file","Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
             DataContext = this;
             SubscribeToSelectedChanged();
-
         }
 
-        public void HideAdminButtons()
+        public void HideAdminButtons()          //function used in MainWindow.xaml.cs
         {
             AddBtn.Visibility = Visibility.Collapsed;
             DltBtn.Visibility = Visibility.Collapsed;
@@ -111,22 +105,14 @@ namespace Content_Management_System.Pages
         {
             if (e.PropertyName == nameof(Spice.Selected))
             {
-                var spice = sender as Spice;
+                var spice = sender as Spice;    //spice that had propertyChange
                 if (spice != null)
                 {
+                    //event hanlers off, so the program wont end up in infinite loop
                     SelectAllCheckBox.Checked -= SelectAllCheckBox_Checked;
                     SelectAllCheckBox.Unchecked -= SelectAllCheckBox_Unchecked;
 
-                    if (Spices.All(s => s.Selected))
-                    {
-                        //if all are checked, check SelectAll
-                        SelectAllCheckBox.IsChecked = true;
-                    }
-                    else if (Spices.Any(s => !s.Selected))
-                    {
-                        // if at least one is unchecked, uncheck selectAll
-                        SelectAllCheckBox.IsChecked = false;
-                    }
+                    SelectAllCheckBox.IsChecked = Spices.All(s => s.Selected); //if all spices are selected manually, check SelectAll
 
                     SelectAllCheckBox.Checked += SelectAllCheckBox_Checked;
                     SelectAllCheckBox.Unchecked += SelectAllCheckBox_Unchecked;
@@ -140,7 +126,10 @@ namespace Content_Management_System.Pages
 
             if (spicesRemove.Count == 0)
             {
-                MessageBox.Show("No items selected!");
+                MessageBox.Show("No items selected!",
+                                "Warning", 
+                                 MessageBoxButton.OK, 
+                                 MessageBoxImage.Warning);
                 return;
             }
 
@@ -151,33 +140,33 @@ namespace Content_Management_System.Pages
 
             if (result == MessageBoxResult.Yes)
             {
-                // Bazni direktorijum projekta (bin/Debug/.. -> do projekta)
+                // Base folder (bin/Debug/.. -> project folder)
                 string projectDir = System.IO.Path.GetFullPath(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\.."));
 
                 foreach (var spice in spicesRemove)
                 {
-                    // Obriši RTF fajl (ako postoji)
+                    // Delete RTF file
                     if (!string.IsNullOrWhiteSpace(spice.RtfPath))
                     {
                         string rtfFullPath = System.IO.Path.Combine(projectDir,
-                            spice.RtfPath.Replace("../../", "").Replace("/", System.IO.Path.DirectorySeparatorChar.ToString()));
+                            spice.RtfPath.Replace("../../", "").Replace("/", System.IO.Path.DirectorySeparatorChar.ToString())); //full path to rtf file
 
                         if (System.IO.File.Exists(rtfFullPath))
                         {
                             try
                             {
-                                System.IO.File.Delete(rtfFullPath);
+                                System.IO.File.Delete(rtfFullPath); //delete rtf file
                             }
                             catch (Exception ex)
                             {
-                                MessageBox.Show($"Failed to delete RTF file for {spice.Name}: {ex.Message}");
+                                MessageBox.Show($"Failed to delete RTF file for {spice.Name}: {ex.Message}","Error", MessageBoxButton.OK, MessageBoxImage.Error);
                             }
                         }
                     }
                     Spices.Remove(spice);
                 }
 
-                TableGrid.Items.Refresh();
+                //TableGrid.Items.Refresh();
                 dataHelper.SerializeObject(Spices, "Spices.xml");
 
                 MessageBox.Show(
@@ -196,9 +185,7 @@ namespace Content_Management_System.Pages
 
             if (result == true)
             {
-                TableWindow newTable = new TableWindow(currentRole);
-                newTable.Show();
-                this.Close();
+                RefreshTable();
             }
         }
 
@@ -209,26 +196,28 @@ namespace Content_Management_System.Pages
 
             if (currentRole == UserRole.Admin)
             {
-                var editWindow = new NewSpiceWindow(spice); // forma za edit
+                var editWindow = new NewSpiceWindow(spice); // form for edit
                 bool? result = editWindow.ShowDialog();
                 if (result == true)
                 {
-                    TableWindow newTable = new TableWindow(currentRole);
-                    newTable.Show();
-                    this.Close();
+                    RefreshTable();
                 }
             }
             else
             {
-                var previewWindow = new SpicePreviewWindow(spice); // samo pregled
+                var previewWindow = new SpicePreviewWindow(spice); // preview form
                 bool? result = previewWindow.ShowDialog();
                 if (result == true)
                 {
-                    TableWindow newTable = new TableWindow(currentRole);
-                    newTable.Show();
-                    this.Close();
+                    RefreshTable();
                 }
             }
+        }
+        private void RefreshTable()
+        {
+            var newTable = new TableWindow(currentRole);
+            newTable.Show();
+            this.Close();
         }
     }
 }
