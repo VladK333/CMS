@@ -44,7 +44,7 @@ namespace Content_Management_System.Pages
             SubscribeToSelectedChanged();
         }
 
-        public void HideAdminButtons()          //function used in MainWindow.xaml.cs
+        public void HideAdminButtons() //function used in MainWindow.xaml.cs
         {
             AddBtn.Visibility = Visibility.Collapsed;
             DltBtn.Visibility = Visibility.Collapsed;
@@ -166,7 +166,6 @@ namespace Content_Management_System.Pages
                     Spices.Remove(spice);
                 }
 
-                //TableGrid.Items.Refresh();
                 dataHelper.SerializeObject(Spices, "Spices.xml");
 
                 MessageBox.Show(

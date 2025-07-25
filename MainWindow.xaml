@@ -55,11 +55,11 @@
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="0.8*"></RowDefinition>
+                    <RowDefinition Height="0.7*"></RowDefinition>
                     <RowDefinition Height="1*"></RowDefinition>
                     <RowDefinition Height="1*"></RowDefinition>
                     <RowDefinition Height="1*"></RowDefinition>
-                    <RowDefinition Height="0.4*"></RowDefinition>
+                    <RowDefinition Height="0.6*"></RowDefinition>
                 </Grid.RowDefinitions>
                 
                 <Label Content="LOGIN" Grid.Row="0" Grid.ColumnSpan="2" 

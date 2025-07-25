@@ -43,7 +43,7 @@ namespace Content_Management_System.Pages
 
             DescriptionBox.TextChanged += DescriptionBox_TextChanged;
 
-            // Praćenje formata teksta dok se caret pomera
+            // tracks text edit for caret
             DescriptionBox.SelectionChanged += DescriptionBox_SelectionChanged;
         }
 
